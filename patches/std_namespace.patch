@@ -1,0 +1,22 @@
+Index: include/Blob/BlobArray.tcc
+===================================================================
+--- include/Blob/BlobArray.tcc	(revision 42102)
++++ include/Blob/BlobArray.tcc	(working copy)
+@@ -164,7 +164,7 @@
+   bool deleteIt;
+   const T* data = arr.getStorage(deleteIt);
+   const casa::IPosition& shape = arr.shape();
+-  vector<uint64> shp(shape.begin(), shape.end());
++  std::vector<uint64> shp(shape.begin(), shape.end());
+   putBlobArray (bs, data, shp.empty() ? 0 : &shp[0], arr.ndim(), true);
+   arr.freeStorage (data, deleteIt);
+   return bs;
+@@ -177,7 +177,7 @@
+   bool fortranOrder;
+   uint16 ndim;
+   uint nalign = getBlobArrayStart (bs, fortranOrder, ndim);
+-  vector<uint64> shp(ndim);
++  std::vector<uint64> shp(ndim);
+   getBlobArrayShape (bs, ndim==0 ? 0 : &shp[0], ndim,
+                      !fortranOrder, nalign);
+   casa::IPosition shape(ndim);
